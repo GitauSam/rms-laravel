@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\Utility\Payment\MpesaController;
-use App\Http\Controllers\Utility\UserUtilityController;
-use App\Http\Controllers\Utility\UtilityController;
-use App\Http\Controllers\Utility\UtilityPaymentController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -20,6 +16,18 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    // return view('landing-page-v3');
-    return view('dashboard');
-})->name('dashboard');
+    return view('landing-page-v3');
+});
+
+Route::middleware(['auth:sanctum'])->group(function() {
+    Route::get('/dashboard/add-vendor', [DashboardController::class, 'createVendor'])
+        ->name('dashboard.add-vendor');
+    Route::post('/dashboard/add-vendor', [DashboardController::class, 'storeVendor'])
+        ->name('dashboard.add-vendor');
+    Route::get('/dashboard/vendors', [DashboardController::class, 'indexVendors'])
+        ->name('dashboard.index-vendors');
+    Route::get('/dashboard/vendor/{id}', [DashboardController::class, 'showVendor'])
+        ->name('dashboard.show-vendor');
+
+    Route::resource('dashboard', DashboardController::class);
+});

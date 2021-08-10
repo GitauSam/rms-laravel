@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Utility\Payment\MpesaController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/callback', function() {
+    Log::debug("get callback called");
+});
+
+Route::post('/callback', function(Request $request) {
+    Log::debug("post callback called again once more");
+    Log::debug(json_encode($request));
 });
