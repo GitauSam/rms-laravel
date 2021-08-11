@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Vendor\VendorController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,11 @@ Route::middleware(['auth:sanctum'])->group(function() {
         ->name('dashboard.index-vendors');
     Route::get('/dashboard/vendor/{id}', [DashboardController::class, 'showVendor'])
         ->name('dashboard.show-vendor');
+    Route::get('/dashboard/vendor/deactivate/{id}', [DashboardController::class, 'deactivateVendor'])
+        ->name('dashboard.deactivate-vendor');
+
+    Route::get('/vendor/add-dish', [VendorController::class, 'createDish'])
+        ->name('vendor.add-dish');
 
     Route::resource('dashboard', DashboardController::class);
 });

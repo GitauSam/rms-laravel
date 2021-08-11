@@ -9,7 +9,7 @@
                         Show Vendor
                     </h2>
                     <a 
-                        href="#"
+                        href="{{ route('dashboard.index-vendors') }}"
                         class="w-28 h-8 text-black text-center rounded-sm 
                                 my-auto py-1 bg-green-500 font-semibold
                                 hover:bg-green-800 hover:text-white 
@@ -56,8 +56,10 @@
                     </table>
                 </div>
                 <div class="flex flex-row w-full my-8 mx-auto justify-end py-12 px-4">
-                    <a href="{{-- route('orders.edit', \Illuminate\Support\Facades\Crypt::encryptString($order->id)) --}}" class="ml-4 rounded-sm px-3 py-1 bg-green-500 hover:bg-green-800 focus:shadow-outline focus:outline-none">Update</a>
-                    <a href="#" class="ml-4 rounded-sm px-3 py-1 bg-red-500 hover:bg-red-800 focus:shadow-outline focus:outline-none">Delete</a>
+                    <!-- <a href="{{-- route('orders.edit', \Illuminate\Support\Facades\Crypt::encryptString($order->id)) --}}" class="ml-4 rounded-sm px-3 py-1 bg-green-500 hover:bg-green-800 focus:shadow-outline focus:outline-none">Update</a> -->
+                    @if($vendor->status == 1)
+                        <a href="{{ route('dashboard.deactivate-vendor', $vendor->id) }}" class="ml-4 rounded-sm px-3 py-1 bg-red-500 hover:bg-red-800 focus:shadow-outline focus:outline-none">Delete</a>
+                    @endif
                 </div>
             </div>
         </div>

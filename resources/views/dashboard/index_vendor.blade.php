@@ -36,18 +36,20 @@
                                 <td class="px-4 py-3 text-sm border">{{ $vendor->customer->id_number }}</td>
                                 <td class="px-4 py-3 text-sm border">{{ $vendor->vendor_name }}</td>
                                 <td class="px-4 py-3 text-sm border">{{ $vendor->customer->created_at }}</td>
-                                <td class="px-4 py-3 text-sm border">
-                                    <a class="w-16 text-center rounded-sm my-1 mx-1 px-3 py-1 bg-yellow-500 hover:bg-yellow-800 focus:shadow-outline focus:outline-none" 
-                                        href="#">
+                                <td class="px-4 py-3 text-sm border flex flex-col">
+                                    <a class="w-18 text-center rounded-sm my-1 mx-1 px-3 py-1 bg-yellow-500 hover:bg-yellow-800 focus:shadow-outline focus:outline-none" 
+                                        href="{{ route('dashboard.show-vendor', $vendor->id) }}">
                                         Show
                                     </a>
-                                    <a class="w-16 text-center rounded-sm my-1 mx-1 px-3 py-1 bg-green-500 hover:bg-green-800 focus:shadow-outline focus:outline-none" 
+                                    <!-- <a class="w-18 text-center rounded-sm my-1 mx-1 px-3 py-1 bg-green-500 hover:bg-green-800 focus:shadow-outline focus:outline-none" 
                                         href="#">
                                         Edit
-                                    </a>
-                                    <button class="w-16 text-center rounded-sm mx-1 my-1 px-3 py-1 bg-red-500 hover:bg-red-800 focus:shadow-outline focus:outline-none">
+                                    </a> -->
+                                    <a class="w-18 text-center rounded-sm mx-1 my-1 px-3 py-1 bg-red-500 hover:bg-red-800 focus:shadow-outline focus:outline-none"
+                                        href="{{ route('dashboard.deactivate-vendor', $vendor->id) }}"
+                                    >
                                         Delete
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

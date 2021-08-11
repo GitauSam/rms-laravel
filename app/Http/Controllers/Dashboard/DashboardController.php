@@ -111,7 +111,7 @@ class DashboardController extends Controller
             'user_id' => $user->id
         ]);
 
-        return route('dashboard');
+        return redirect()->route('dashboard.index');
     }
 
     public function indexVendors() {
@@ -119,7 +119,7 @@ class DashboardController extends Controller
         return view(
             'dashboard.index_vendor',
             [
-                "vendors" => Vendor::all()
+                "vendors" => Vendor::where('status', '=', 1)->get()
             ]
         );
     }
@@ -131,5 +131,13 @@ class DashboardController extends Controller
                 "vendor" => Vendor::find($id),
             ]
             );
+    }
+
+    public function deactivateVendor($id) {
+        $vendor = Vendor::find($id);
+        $vendor->status = 0;
+        $vendor->save();
+
+        return redirect()->route('dashboard.show-vendor', $id);
     }
 }
