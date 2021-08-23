@@ -35,5 +35,20 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/vendor/add-dish', [VendorController::class, 'createDish'])
         ->name('vendor.add-dish');
 
+    Route::post('/vendor/add-dish', [VendorController::class, 'storeDish'])
+        ->name('vendor.add-dish');
+
+    Route::get('/vendor/dishes', [VendorController::class, 'indexDishes'])
+        ->name('vendor.index-dishes');
+
+    Route::get('/vendor/dish/{id}', [VendorController::class, 'showDish'])
+        ->name('vendor.show-dish');
+
+    Route::get('/vendor/dish/edit/{id}', [VendorController::class, 'editDish'])
+        ->name('vendor.edit-dish');
+
+    Route::post('/vendor/dish/edit/{id}', [VendorController::class, 'updateDish'])
+        ->name('vendor.update-dish');
+
     Route::resource('dashboard', DashboardController::class);
 });

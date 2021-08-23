@@ -105,7 +105,7 @@ class DashboardController extends Controller
 
         $user->assignRole('vendor');
 
-        $vendor = Vendor::create([
+        Vendor::create([
             'vendor_name' => $validated['vendor_name'],
             'status' => 1,
             'user_id' => $user->id

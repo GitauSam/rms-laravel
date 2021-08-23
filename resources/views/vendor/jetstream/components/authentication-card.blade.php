@@ -7,7 +7,7 @@
 
     <div class="nav-content nav-content-sm">
         <div class="nav-content-logo nav-content-logo-sm">
-            <a href="{{ url('/') }}">lipa utilities</a>
+            <a href="{{ url('/') }}">cafe de jnr</a>
         </div>
         <div class="nav-content-links nav-content-links-sm">
         </div>
