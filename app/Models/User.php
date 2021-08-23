@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Buyer\Buyer;
 use App\Models\Vendor\Vendor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,5 +68,9 @@ class User extends Authenticatable
 
     public function vendor() {
         return $this->hasOne(Vendor::class);
+    }
+
+    public function dishes() {
+        return $this->hasMany(Buyer::class);
     }
 }

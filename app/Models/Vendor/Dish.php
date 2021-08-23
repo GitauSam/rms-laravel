@@ -23,6 +23,6 @@ class Dish extends Model
     }
 
     public function vendor() {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

@@ -20,23 +20,12 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'list utilities']);
-        Permission::create(['name' => 'edit utilities']);
-        Permission::create(['name' => 'delete utilities']);
-        Permission::create(['name' => 'pay utilities']);
-        Permission::create(['name' => 'list utility payments']);
-        Permission::create(['name' => 'mod list utilities']);
-        Permission::create(['name' => 'mod edit utilities']);
-        Permission::create(['name' => 'mod delete utilities']);
+        Permission::create(['name' => 'list dishes']);
 
         $role = Role::create(['name' => 'user'])
             ->givePermissionTo(
                                 [
-                                    'list utilities',
-                                    'edit utilities',
-                                    'pay utilities',
-                                    'delete utilities',
-                                    'list utility payments'
+                                    'list dishes'
                                 ]
                             );
 
@@ -44,9 +33,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'moderator'])
             ->givePermissionTo(
                                 [
-                                    'mod list utilities', 
-                                    'mod edit utilities',
-                                    'mod delete utilities'
+                                    'list dishes',
                                 ]
                             );
 

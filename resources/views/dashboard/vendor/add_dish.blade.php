@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    <div class="w-full leading-loose">
+    <div class="w-full h-full leading-loose">
         <form class="w-11/12 m-4 p-10 bg-white rounded shadow-xl" method="POST" action="{{ route('vendor.add-dish') }}" enctype="multipart/form-data">
             @if ($errors->any())
             <div role="alert">

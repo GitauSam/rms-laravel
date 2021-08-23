@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Buyer\BuyerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Vendor\VendorController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,16 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
     Route::post('/vendor/dish/edit/{id}', [VendorController::class, 'updateDish'])
         ->name('vendor.update-dish');
+
+    // Dishes & orders routes
+    Route::get('/dishes', [BuyerController::class, 'index'])
+        ->name('dishes');
+    Route::get('/dish/store/{id}', [BuyerController::class, 'storeOrder'])
+        ->name('dishes.order');
+    Route::get('dishes/orders', [BuyerController::class, 'indexOrders'])
+        ->name('dishes.orders');
+    Route::get('/dish/order/{id}', [BuyerController::class, 'showOrder'])
+        ->name('order.show');
 
     Route::resource('dashboard', DashboardController::class);
 });
