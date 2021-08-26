@@ -2,9 +2,13 @@
 
 use App\Http\Controllers\Buyer\BuyerController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Payments\PaymentController;
 use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Integrations\LipaNaMpesa;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +64,22 @@ Route::middleware(['auth:sanctum'])->group(function() {
         ->name('dishes.orders');
     Route::get('/dish/order/{id}', [BuyerController::class, 'showOrder'])
         ->name('order.show');
+    Route::post('/dish/pay', [PaymentController::class, 'payDish'])
+        ->name('dish.pay');
 
     Route::resource('dashboard', DashboardController::class);
 });
+
+// {
+//     "BusinessShortCode": 174379,
+//     "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjEwMTI0MTAxMDMy",
+//     "Timestamp": "20210124101032",
+//     "TransactionType": "CustomerPayBillOnline",
+//     "Amount": 1,
+//     "PartyA": 254746820652,
+//     "PartyB": 174379,
+//     "PhoneNumber": 254746820652,
+//     "CallBackURL": "https://949af1871944.ngrok.io",
+//     "AccountReference": "495632184",
+//     "TransactionDesc": "test_2"
+// }

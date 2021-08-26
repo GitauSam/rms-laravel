@@ -2,38 +2,30 @@
 
 namespace App\Http\Integrations;
 
-use App\Models\TransactionLog\TransactionLog;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class MpesaOauthToken{
-    public static function getToken(TransactionLog $transactionLog) {
+    public static function getToken() {
 
         try {
 
             $token = Http::withBasicAuth
                             (
-                                config('services.mpesa.lipia_utilities_consumer_key'), 
-                                config('services.mpesa.lipia_utilities_consumer_secret')
+                                "HN2r3MJYWsv2AcChas3XgiPplWKiyAh4", 
+                                "AIe4UmUGtQUtTEGz"
                             )
-                            ->get(config('services.mpesa.access_token_url'))
+                            ->get("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials")
                             ->json()['access_token'];
 
-            $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                " Successfully generated mpesa oauth token. " .
-                "Token: " . $token . ".";
-            $transactionLog->mpesa_oauth_token = $token;
-            $transactionLog->mpesa_oauth_token_status = '30';
-            $transactionLog->save();
+            Log::debug("Requested mpesa token successfully");
 
             return $token;
 
         } catch (\Exception $e) {
 
-            $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                " Exception occured while generating mpesa oauth token. " .
-                "Error: " . $e->getMessage() . ".";
-            $transactionLog->mpesa_oauth_token_status = '25';
-            $transactionLog->save();
+            Log::debug("Exception occurred while requesting mpesa token");
+            Log::debug("Cause: " . $e->getMessage());
 
             return 0;
 

@@ -20,11 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/callback', function() {
-    Log::debug("get callback called");
-});
-
-Route::post('/callback', function(Request $request) {
-    Log::debug("post callback called again once more");
+Route::post('/spush/cb', function(Request $request) {
+    Log::debug("Mpesa callback response returned");
     Log::debug(json_encode($request));
 });

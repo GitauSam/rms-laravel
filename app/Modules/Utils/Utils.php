@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 trait Utils 
 {
 
-    public function getCurrentDate($format = '', TransactionLog $transactionLog) 
+    public function getCurrentDate($format = 'YmdHis') 
     {
 
         try 
@@ -23,12 +23,7 @@ trait Utils
                 
                 $ts = Carbon::now();
                 
-                $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                    " Timestamp format is empty. 
-                    Generated timestamp: " .  $ts . ".";
-                $transactionLog->mpesa_request_timestamp = $ts;
-                $transactionLog->mpesa_request_timestamp_status = '30';
-                $transactionLog->save();
+                Log::debug("Timestamp format is empty. Generated timestamp: " .  $ts . ".");
 
                 return $ts;
 
@@ -36,23 +31,14 @@ trait Utils
 
             $ts = Carbon::now()->format($format);
 
-            $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                " Timestamp format is not empty. 
-                Generated timestamp: " .  $ts . ".";
-            $transactionLog->mpesa_request_timestamp = $ts;
-            $transactionLog->mpesa_request_timestamp_status = '30';
-            $transactionLog->save();
+            Log::debug("Timestamp format is not empty. Generated timestamp: " .  $ts . ".");
 
             return $ts;
 
         } catch(\Exception $e) 
         {
 
-            $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                " Exception occured while generating timestamp. 
-                Error: " . $e . ".";
-            $transactionLog->mpesa_request_timestamp_status = '25';
-            $transactionLog->save();
+            Log::debug("Exception occured while generating timestamp. Error: " . $e . ".");
 
             return 0;
 
@@ -60,7 +46,7 @@ trait Utils
 
     }
 
-    public function returnEncodedValue($encode_format, $items, TransactionLog $transactionLog) 
+    public function returnEncodedValue($encode_format = 'base64', $items) 
     {
 
         try 
@@ -68,11 +54,7 @@ trait Utils
 
             if (empty($encode_format) || count($items) < 1) {
 
-                $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                    " Either encoding format is empty or there are no items to encode.
-                    Items to be encoded count: " . count($items) . ".";
-                $transactionLog->mpesa_password_status = '20';
-                $transactionLog->save();
+                Log::debug("Either encoding format is empty or there are no items to encode.Items to be encoded count: " . count($items) . ".");
 
                 return 0;
             }
@@ -82,21 +64,12 @@ trait Utils
 
                     $encoded_value = base64_encode(join("", $items));
 
-                    $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                        " Encoding items successfully. 
-                        Encoded value: " . $encoded_value . ".";
-                    $transactionLog->mpesa_password = $encoded_value;
-                    $transactionLog->mpesa_password_status = '30';
-                    $transactionLog->save();
+                    Log::debug("Encoding items successfully. Encoded value: " . $encoded_value . ".");
 
                     return $encoded_value;
                 default:
 
-                    $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                        " No matching encoding format found. Encoding format: " 
-                        . $encode_format . ".";
-                    $transactionLog->mpesa_password_status = '20';
-                    $transactionLog->save();
+                    Log::debug("No matching encoding format found. Encoding format: " . $encode_format . ".");
 
                     return 0;
             }
@@ -104,11 +77,7 @@ trait Utils
         } catch (\Exception $e) 
         {
             
-            $transactionLog->transaction_response = $transactionLog->transaction_response . 
-                " Could not encode the items. Error: " 
-                . $e->message . ".";
-            $transactionLog->mpesa_password_status = '25';
-            $transactionLog->save();
+            Log::debug("Could not encode the items. Error: " . $e->message . ".");
 
             return 0;
 
