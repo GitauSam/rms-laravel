@@ -102,6 +102,7 @@ class LipaNaMpesa
             }
 
             Log::debug("breakpoint 15");
+            Log::debug("Phone No: " . auth()->user()->phone_number);
 
             $transactionDesc = substr(md5(time()), 0, 16);
 
@@ -111,12 +112,10 @@ class LipaNaMpesa
                 'Timestamp' => $currentTime,
                 'TransactionType' => 'CustomerPayBillOnline',
                 'Amount' => $amount,
-                // 'PartyA' => auth()->user()->phone_number,
-                'PartyA' => 254746820652,
+                'PartyA' => auth()->user()->phone_number,
                 'PartyB' => $paybillNo,
-                // 'PhoneNumber' => auth()->user()->phone_number,
-                'PhoneNumber' => 254746820652,
-                'CallBackURL' => 'https://d23a-41-139-130-105.ngrok.io/api/spush/cb',
+                'PhoneNumber' => auth()->user()->phone_number,
+                'CallBackURL' => 'https://6fab-197-232-77-192.ngrok.io/api/spush/cb',
                 'AccountReference' => $accountReference,
                 'TransactionDesc' => $transactionDesc
             ];
@@ -135,7 +134,7 @@ class LipaNaMpesa
             $payment->mpesa_account_ref = $accountReference;
             $payment->mpesa_transaction_desc = $transactionDesc;
             $payment->mpesa_integration_request = json_encode($request_array);
-            // $payment->vendor_id = $vendor_id;
+            $payment->vendor_id = $vendor_id;
             $payment->save();
 
                             
@@ -150,8 +149,6 @@ class LipaNaMpesa
             Log::debug("breakpoint 19");
 
             Log::debug("Response: " . json_encode($response));
-
-            dump($response);
 
             if ($response == null || empty($response) ) 
             {
@@ -197,6 +194,8 @@ class LipaNaMpesa
                 $payment->mpesa_customer_message = $response['CustomerMessage'];
                 $payment->mpesa_integration_response = $response->body();
                 $payment->save();
+
+                $transactionStatus = '30';
             
             }
 
@@ -206,8 +205,6 @@ class LipaNaMpesa
         catch (\Exception $e) 
         {
             Log::debug("breakpoint 17");
-
-            dump($e);
 
             Log::debug('Unable to complete lipa na mpesa transaction. Error: ' . json_encode($e) . ".");
 

@@ -98,6 +98,7 @@ class PaymentController extends Controller
 
     public function payDish(Request $request)
     {
+        // dd($request->all());
 
         try {
             $lipaNaMpesa = new LipaNaMpesa();
@@ -111,5 +112,9 @@ class PaymentController extends Controller
             Log::debug("Cause: " . $e->getMessage());
             return redirect()->route('dishes.orders')->with("Unable to confirm order");
         }
+    }
+
+    public function processCallbackResponse(Request $request) {
+
     }
 }

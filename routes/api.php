@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/spush/cb', function(Request $request) {
     Log::debug("Mpesa callback response returned");
-    Log::debug(json_encode($request));
+    Log::debug(json_encode($request->all()));
 });

@@ -31,7 +31,7 @@
     </header>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         @foreach($orders as $order)
-            {{-- dd($order->dish->vendor) --}}
+            {{-- dd($order->dish->vendor->vendor) --}}
             <div class="mt-8 bg-white rounded w-60">
                 <a href="{{ route('order.show', $order->dish->id) }}">
                     <img src="{{ asset($order->dish->dishImages[0]->image_url) }}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150">
@@ -71,7 +71,7 @@
                             @csrf
                             <input class="hidden" type="text" name="amount" value="{{ $order->dish->price }}" required/>
                             <input class="hidden" type="text" name="order_id" value="{{ $order->id }}" required/>
-                            <input class="hidden" type="text" name="vendor_id" value="{{ $order->dish->vendor->id }}" required/>
+                            <input class="hidden" type="text" name="vendor_id" value="{{ $order->dish->vendor->vendor->id }}" required/>
                             <div class="flex items-center justify-center text-gray-400 text-sm mt-1">
                                 <button href="" class="px-4 py-1 mt-4 text-white font-light tracking-wider bg-gray-900 w-40 rounded text-center">Pay</button>
                             </div>
