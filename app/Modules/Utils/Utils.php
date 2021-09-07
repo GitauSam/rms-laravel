@@ -12,24 +12,24 @@ use Illuminate\Support\Facades\Log;
 trait Utils 
 {
 
-    public function getCurrentDate($format = 'YmdHis') 
+    public function getCurrentDate() 
     {
 
         try 
         {
 
-            if (empty($format)) 
-            {
+            // if (empty($format)) 
+            // {
                 
-                $ts = Carbon::now();
+            //     $ts = Carbon::now();
                 
-                Log::debug("Timestamp format is empty. Generated timestamp: " .  $ts . ".");
+            //     Log::debug("Timestamp format is empty. Generated timestamp: " .  $ts . ".");
 
-                return $ts;
+            //     return $ts;
 
-            }
+            // }
 
-            $ts = Carbon::now()->format($format);
+            $ts = Carbon::now()->format('YmdHis');
 
             Log::debug("Timestamp format is not empty. Generated timestamp: " .  $ts . ".");
 
@@ -46,7 +46,7 @@ trait Utils
 
     }
 
-    public function returnEncodedValue($encode_format = 'base64', $items) 
+    public function returnEncodedValue($encode_format, $items) 
     {
 
         try 

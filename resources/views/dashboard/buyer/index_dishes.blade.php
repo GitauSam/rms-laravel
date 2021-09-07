@@ -81,11 +81,11 @@
             @endforeach
         </div>
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <div x-show="mod" id="map" class="fixed z-10 inset-0 overflow-y-auto h-96 w-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- <div x-show="mod" id="map" class="fixed z-10 inset-0 overflow-y-auto h-96 w-full" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARUNvMUJUcsVZPZIw1SienruS93M85wUs&callback=initMap&libraries=&v=weekly" async></script>
-        </div>
+        </div> -->
     </div>
-    <script>
+    <!-- <script>
       // Initialize and add the map
       function initMap() {
         // The location of Uluru
@@ -101,5 +101,5 @@
           map: map,
         });
       }
-    </script>
+    </script> -->
 </x-dashboard-layout>

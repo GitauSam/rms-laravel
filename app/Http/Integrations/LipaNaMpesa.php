@@ -16,7 +16,7 @@ class LipaNaMpesa
 
     use Utils;
 
-    public function pay($amount, $accountReference='495632184', $order_id, $vendor_id) 
+    public function pay($amount, $accountReference, $order_id, $vendor_id) 
     {
         $transactionStatus = '20';
         Log::debug("breakpoint 1");
@@ -116,7 +116,7 @@ class LipaNaMpesa
                 'PartyB' => $paybillNo,
                 'PhoneNumber' => auth()->user()->phone_number,
                 'CallBackURL' => 'https://6fab-197-232-77-192.ngrok.io/api/spush/cb',
-                'AccountReference' => $accountReference,
+                'AccountReference' => '495632184',
                 'TransactionDesc' => $transactionDesc
             ];
 
@@ -131,7 +131,7 @@ class LipaNaMpesa
             $payment->mpesa_party_b = $paybillNo;
             $payment->mpesa_transaction_type = 'CustomerPayBillOnline';
             $payment->mpesa_sender_msisdn = auth()->user()->phone_number;
-            $payment->mpesa_account_ref = $accountReference;
+            $payment->mpesa_account_ref = '495632184';
             $payment->mpesa_transaction_desc = $transactionDesc;
             $payment->mpesa_integration_request = json_encode($request_array);
             $payment->vendor_id = $vendor_id;
