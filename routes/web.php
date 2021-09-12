@@ -21,9 +21,13 @@ use Illuminate\Support\Facades\Log;
 |
 */
 
-Route::get('/', function () {
+Route::get('/beta', function () {
     return view('landing-page-v3');
 });
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
 
 Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('/dashboard/add-vendor', [DashboardController::class, 'createVendor'])
@@ -66,20 +70,8 @@ Route::middleware(['auth:sanctum'])->group(function() {
         ->name('order.show');
     Route::post('/dish/pay', [PaymentController::class, 'payDish'])
         ->name('dish.pay');
+    Route::get('/dish/delete/{id}', [VendorController::class, 'deactivateDish'])
+        ->name('dish.delete');
 
     Route::resource('dashboard', DashboardController::class);
 });
-
-// {
-//     "BusinessShortCode": 174379,
-//     "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjEwMTI0MTAxMDMy",
-//     "Timestamp": "20210124101032",
-//     "TransactionType": "CustomerPayBillOnline",
-//     "Amount": 1,
-//     "PartyA": 254746820652,
-//     "PartyB": 174379,
-//     "PhoneNumber": 254746820652,
-//     "CallBackURL": "https://949af1871944.ngrok.io",
-//     "AccountReference": "495632184",
-//     "TransactionDesc": "test_2"
-// }

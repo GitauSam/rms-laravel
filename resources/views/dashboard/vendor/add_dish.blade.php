@@ -249,6 +249,74 @@
             empty.classList.remove("hidden");
             gallery.append(empty);
         };
+        console.log("embedded")
+        function setActiveTab() {
+            console.log("activated")
+            console.log("tab 2")
+
+            document.getElementById("tab1").classList.remove("text-black")
+            document.getElementById("tab1").classList.add("text-gray-500")
+            document.getElementById("tab1").classList.remove("bg-gradient-to-r")
+            document.getElementById("tab1").classList.remove("from-white")
+            document.getElementById("tab1").classList.remove("to-gray-300")
+            document.getElementById("tab1").classList.remove("border-r-4")
+            document.getElementById("tab1").classList.remove("border-black")
+            document.getElementById("tab1").classList.remove("dark:from-gray-700")
+            document.getElementById("tab1").classList.remove("dark:to-gray-800")
+            document.getElementById("tab1").classList.remove("border-r-4")
+            document.getElementById("tab1").classList.remove("border-black")
+
+            document.getElementById("tab2").classList.add("text-black")
+            document.getElementById("tab2").classList.remove("text-gray-500")
+            document.getElementById("tab2").classList.add("bg-gradient-to-r")
+            document.getElementById("tab2").classList.add("from-white")
+            document.getElementById("tab2").classList.add("to-gray-300")
+            document.getElementById("tab2").classList.add("border-r-4")
+            document.getElementById("tab2").classList.add("border-black")
+            document.getElementById("tab2").classList.add("dark:from-gray-700")
+            document.getElementById("tab2").classList.add("dark:to-gray-800")
+            document.getElementById("tab2").classList.add("border-r-4")
+            document.getElementById("tab2").classList.add("border-black")
+
+            document.getElementById("tab3").classList.remove("text-black")
+            document.getElementById("tab3").classList.add("text-gray-500")
+            document.getElementById("tab3").classList.remove("bg-gradient-to-r")
+            document.getElementById("tab3").classList.remove("from-white")
+            document.getElementById("tab3").classList.remove("to-gray-300")
+            document.getElementById("tab3").classList.remove("border-r-4")
+            document.getElementById("tab3").classList.remove("border-black")
+            document.getElementById("tab3").classList.remove("dark:from-gray-700")
+            document.getElementById("tab3").classList.remove("dark:to-gray-800")
+            document.getElementById("tab3").classList.remove("border-r-4")
+            document.getElementById("tab3").classList.remove("border-black")
+
+            document.getElementById("tab4").classList.remove("text-black")
+            document.getElementById("tab4").classList.add("text-gray-500")
+            document.getElementById("tab4").classList.remove("bg-gradient-to-r")
+            document.getElementById("tab4").classList.remove("from-white")
+            document.getElementById("tab4").classList.remove("to-gray-300")
+            document.getElementById("tab4").classList.remove("border-r-4")
+            document.getElementById("tab4").classList.remove("border-black")
+            document.getElementById("tab4").classList.remove("dark:from-gray-700")
+            document.getElementById("tab4").classList.remove("dark:to-gray-800")
+            document.getElementById("tab4").classList.remove("border-r-4")
+            document.getElementById("tab4").classList.remove("border-black")
+
+            document.getElementById("tab5").classList.remove("text-black")
+            document.getElementById("tab5").classList.add("text-gray-500")
+            document.getElementById("tab5").classList.remove("bg-gradient-to-r")
+            document.getElementById("tab5").classList.remove("from-white")
+            document.getElementById("tab5").classList.remove("to-gray-300")
+            document.getElementById("tab5").classList.remove("border-r-4")
+            document.getElementById("tab5").classList.remove("border-black")
+            document.getElementById("tab5").classList.remove("dark:from-gray-700")
+            document.getElementById("tab5").classList.remove("dark:to-gray-800")
+            document.getElementById("tab5").classList.remove("border-r-4")
+            document.getElementById("tab5").classList.remove("border-black")
+
+        }
+
+        setActiveTab()
     </script>
     <style>
         .hasImage:hover section {

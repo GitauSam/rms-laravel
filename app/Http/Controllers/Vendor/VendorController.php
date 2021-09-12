@@ -200,4 +200,12 @@ class VendorController extends Controller
 
         return redirect()->route('vendor.index-dishes')->with('status', 'Dish updated successfully');
     }
+
+    public function deactivateDish($id) {
+        $dish = Dish::find($id);
+        $dish->status = 0;
+        $dish->save();
+
+        return redirect()->route('vendor.index-dishes')->with('status', 'Dish deleted successfully');
+    }
 }

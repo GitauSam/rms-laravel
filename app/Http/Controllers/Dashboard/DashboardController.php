@@ -138,6 +138,9 @@ class DashboardController extends Controller
         $vendor->status = 0;
         $vendor->save();
 
+        $vendor->customer->status = 0;
+        $vendor->customer->save();
+
         return redirect()->route('dashboard.show-vendor', $id);
     }
 }

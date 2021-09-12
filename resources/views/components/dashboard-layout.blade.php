@@ -4,7 +4,7 @@
             <div class="h-full hidden lg:block my-4 ml-4 shadow-lg relative w-80">
                 <div class="bg-white h-full rounded-2xl dark:bg-gray-700">
                     <div class="flex items-center justify-center pt-6">
-                        <svg width="35" height="30" viewBox="0 0 256 366" version="1.1" preserveAspectRatio="xMidYMid">
+                        <!-- <svg width="35" height="30" viewBox="0 0 256 366" version="1.1" preserveAspectRatio="xMidYMid">
                             <defs>
                                 <linearGradient x1="12.5189534%" y1="85.2128611%" x2="88.2282959%" y2="10.0225497%" id="linearGradient-1">
                                     <stop stop-color="#FF0057" stop-opacity="0.16" offset="0%">
@@ -21,25 +21,31 @@
                                 <circle fill="url(#linearGradient-1)" opacity="0.5" transform="translate(147.013244, 147.014675) rotate(90.000000) translate(-147.013244, -147.014675) " cx="147.013244" cy="147.014675" r="78.9933938">
                                 </circle>
                             </g>
-                        </svg>
+                        </svg> -->
                     </div>
                     <nav class="mt-6">
                         <div>
-                            <a class="w-full font-thin uppercase text-blue-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start bg-gradient-to-r from-white to-blue-100 border-r-4 border-blue-500 dark:from-gray-700 dark:to-gray-800 border-r-4 border-blue-500" 
-                                href="{{ route('dashboard.index') }}"
-                            >
-                                <span class="text-left">
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
-                                        </path>
-                                    </svg>
-                                </span>
-                                <span class="mx-4 text-sm font-normal">
-                                    Dashboard
-                                </span>
-                            </a>
+                            <div onclick="setActiveTab(1)">
+                                <a 
+                                    id= "tab1"
+                                    class="w-full font-thin uppercase text-gray-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start" 
+                                    href="{{ route('dashboard.index') }}"
+                                >
+                                    <span class="text-left">
+                                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="mx-4 text-sm font-normal">
+                                        Dashboard
+                                    </span>
+                                </a>
+                            </div>
                             @if(auth()->user()->hasRole('super-admin'))
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    id= "tab2"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
                                     href="{{ route('dashboard.index-vendors') }}"
                                 >
                                     <span class="text-left">
@@ -52,7 +58,9 @@
                                         View vendors
                                     </span>
                                 </a>
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    id= "tab3"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
                                     href="{{ route('dashboard.add-vendor') }}"
                                 >
                                     <span class="text-left">
@@ -66,7 +74,11 @@
                                     </span>
                                 </a>
                             @elseif(auth()->user()->hasRole('vendor'))
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    onclick="setActiveTab(2)"
+                                    id="tab2"
+                                    @click="openTab = 2"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
                                     href="{{ route('vendor.add-dish') }}"
                                 >
                                     <span class="text-left">
@@ -79,7 +91,11 @@
                                         Add dish
                                     </span>
                                 </a>
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    onclick="setActiveTab(3)"
+                                    id="tab3"
+                                    @click="openTab = 3"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
                                     href="{{ route('vendor.index-dishes') }}"
                                 >
                                     <span class="text-left">
@@ -92,7 +108,11 @@
                                         View dishes
                                     </span>
                                 </a>
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    onclick="setActiveTab(4)"
+                                    id="tab4"
+                                    @click="openTab = 4"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
                                     href="#"
                                 >
                                     <span class="text-left">
@@ -105,7 +125,10 @@
                                         View orders
                                     </span>
                                 </a>
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    onclick="setActiveTab(5)"
+                                    id= "tab5"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
                                     href="#"
                                 >
                                     <span class="text-left">
@@ -119,7 +142,13 @@
                                     </span>
                                 </a>
                             @elseif(auth()->user()->hasRole('user'))
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    onclick="setActiveTab(2)"
+                                    id="tab2"
+                                    @click="openTab = 2"
+                                    class="
+                                        w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black
+                                    " 
                                         href="{{ route('dishes') }}"
                                 >
                                     <span class="text-left">
@@ -132,7 +161,11 @@
                                         View dishes
                                     </span>
                                 </a>
-                                <a class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500" 
+                                <a 
+                                    onclick="setActiveTab(3)"
+                                    id="tab3"
+                                    @click="openTab = 3"
+                                    class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
                                     href="{{ route('dishes.orders') }}"
                                 >
                                     <span class="text-left">
