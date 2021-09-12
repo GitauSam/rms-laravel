@@ -2,6 +2,8 @@
 
 namespace App\Models\Payments;
 
+use App\Models\Buyer\Buyer;
+use App\Models\Vendor\Vendor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,4 +45,12 @@ class Payment extends Model
         'buyer_id', // p
         'vendor_id' // p
     ];
+
+    public function buyer() {
+        return $this->belongsTo(Buyer::class);
+    }
+
+    public function vendor() {
+        return $this->belongsTo(Vendor::class);
+    }
 }

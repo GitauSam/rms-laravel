@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Payments\PaymentController;
 use App\Http\Controllers\Utility\Payment\MpesaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -20,7 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/spush/cb', function(Request $request) {
-    Log::debug("Mpesa callback response returned");
-    Log::debug(json_encode($request->all()));
-});
+Route::post('/spush/cb', [PaymentController::class, 'processCallbackResponse']);

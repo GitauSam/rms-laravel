@@ -55,12 +55,8 @@
                         <span class="mx-2 overflow-ellipsis">{{ $order->dish->ingredients }}</span>
                     </div>
                     <div class="flex items-center text-gray-400 text-sm mt-1">
-                        <span class="ml-1">Status</span>
-                        @if($order->purchased == 1)
-                            <span class="mx-2 rounded-full py-3 px-6 bg-green-400">
-                                Confirmed
-                            </span>
-                        @else
+                        @if($order->purchased != 1)
+                            <span class="ml-1">Status</span>
                             <span class="mx-2 rounded-full py-1 px-2 bg-red-400 text-white">
                                 Pending
                             </span>
@@ -76,6 +72,8 @@
                                 <button href="" class="px-4 py-1 mt-4 text-white font-light tracking-wider bg-gray-900 w-40 rounded text-center">Pay</button>
                             </div>
                         </form>
+                    @else
+                        <div class="px-4 py-1 mt-4 text-white font-light tracking-wider bg-green-900 w-40 rounded text-center">Confirmed</div>
                     @endif
                 </div>
             </div>

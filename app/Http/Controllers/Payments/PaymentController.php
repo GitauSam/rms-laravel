@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Payments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Integrations\LipaNaMpesa;
+use App\Models\Payments\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
@@ -116,5 +118,42 @@ class PaymentController extends Controller
 
     public function processCallbackResponse(Request $request) {
 
+        Log::debug('breakpoint 201');
+        
+        $validated = $request->validate([
+            'Body' => 'required',
+            'Body.stkCallback' => 'required',
+            'Body.stkCallback.MerchantRequestID' => 'required|max:255',
+            'Body.stkCallback.CheckoutRequestID' => 'required|max:255',
+            'Body.stkCallback.ResultCode' => 'required',
+            'Body.stkCallback.ResultDesc' => 'required|max:255',
+        ]);
+
+        Log::debug('breakpoint 202');
+
+        $payment = Payment::where('mpesa_merchant_response_id', '=', $validated['Body']['stkCallback']['MerchantRequestID'])
+                            ->where('mpesa_checkout_response_id', '=', $validated['Body']['stkCallback']['CheckoutRequestID'])
+                            ->first();
+
+        Log::debug('breakpoint 203');
+
+        $payment->mpesa_callback_merchant_response_id = $validated['Body']['stkCallback']['MerchantRequestID'];
+        $payment->mpesa_callback_checkout_response_id = $validated['Body']['stkCallback']['CheckoutRequestID'];
+        $payment->mpesa_callback_result_code = $validated['Body']['stkCallback']['ResultCode'];
+        $payment->mpesa_callback_result_desc = $validated['Body']['stkCallback']['ResultDesc'];
+        $payment->mpesa_callback_response = json_encode($validated);
+        $payment->mpesa_callback_response_transaction_date = Carbon::now()->format('Y-m-d H:i:s');
+
+        Log::debug('breakpoint 204');
+
+        $payment->save();
+
+        Log::debug('breakpoint 205');
+
+        $payment->buyer->purchased = 1;
+        Log::debug('breakpoint 206');
+        $payment->buyer->save();
+
+        Log::debug('breakpoint 207');
     }
 }

@@ -14,6 +14,7 @@ class Buyer extends Model
     protected $fillable = [
         'user_id',
         'dish_id',
+        'purchased',
         'status'
     ];
 

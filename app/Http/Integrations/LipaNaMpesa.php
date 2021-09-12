@@ -115,11 +115,12 @@ class LipaNaMpesa
                 'PartyA' => auth()->user()->phone_number,
                 'PartyB' => $paybillNo,
                 'PhoneNumber' => auth()->user()->phone_number,
-                'CallBackURL' => 'https://6fab-197-232-77-192.ngrok.io/api/spush/cb',
+                'CallBackURL' => 'https://81a3-197-232-77-192.ngrok.io/api/spush/cb',
                 'AccountReference' => '495632184',
                 'TransactionDesc' => $transactionDesc
             ];
 
+            $payment->transaction_amount = $amount;
             $payment->buyer_id = $order_id;
             $payment->mpesa_oauth_token = $token;
             $payment->business_short_code = $paybillNo;
