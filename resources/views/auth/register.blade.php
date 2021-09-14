@@ -31,13 +31,32 @@
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <input id="password-field" type="password" 
+                        class="text-black block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+                        name="password" required autocomplete="new-password">
+                <span toggle="#password-field" class="field-icon toggle-password" onclick="toggleViewPass()"><i class="fas fa-eye field"></i></span>
             </div>
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <input id="password-field-confirm" type="password" 
+                        class="text-black block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+                        name="password_confirmation" required autocomplete="new-password">
+                <span toggle="#password-field" class="field-icon toggle-password" onclick="toggleViewPass()"><i class="fas fa-eye field"></i></span>
             </div>
+            <script>
+                function toggleViewPass() {
+                    var input = document.getElementById("password-field")
+                    var inputConf = document.getElementById("password-field-confirm")
+                    if (input.getAttribute("type") == "password") {
+                        input.setAttribute("type", "text");
+                        inputConf.setAttribute("type", "text");
+                    } else {
+                        input.setAttribute("type", "password");
+                        inputConf.setAttribute("type", "password");
+                    }
+                }
+            </script>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">

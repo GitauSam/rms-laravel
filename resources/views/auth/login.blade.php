@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <style>
+        
+    </style>
     <x-jet-authentication-card>
 
         <x-jet-validation-errors class="mb-4" />
@@ -19,19 +22,35 @@
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <div class="w-full relative">
+                    <input id="password-field" type="password" 
+                        class="text-black block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" 
+                        name="password" required autocomplete="current-password">
+                    <span toggle="#password-field" class="field-icon toggle-password" onclick="toggleViewPass()"><i class="fas fa-eye field"></i></span>
+                </div>
             </div>
+
+            <script>
+                function toggleViewPass() {
+                    var input = document.getElementById("password-field")
+                    if (input.getAttribute("type") == "password") {
+                        input.setAttribute("type", "text");
+                    } else {
+                        input.setAttribute("type", "password");
+                    }
+                }
+            </script>
 
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-jet-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-white">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-black">{{ __('Remember me') }}</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-xs text-white hover:text-gray-900" href="{{ route('password.request') }}">
+                    <a class="underline text-xs text-black hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif

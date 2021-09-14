@@ -14,15 +14,20 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         <link rel="stylesheet" href="{{ asset('css/styles-beta.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
 
-        <!-- <style>
-            .gradient {
-                background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+        <style>
+            .field-icon {
+                float: right;
+                margin-left: -90px;
+                margin-top: -25px;
+                position: relative;
+                z-index: 2;
             }
-        </style> -->
+        </style>
     </head>
     <body>
         <div class="antialiased">

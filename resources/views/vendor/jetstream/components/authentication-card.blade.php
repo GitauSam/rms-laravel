@@ -1,19 +1,12 @@
 <div class="min-h-screen flex flex-col justify-center items-center 
-            pt-6 sm:pt-0 authentication-card"
+            pt-6 sm:pt-0"
 >
-    <!-- <div>
-        {{-- $logo --}}
-    </div> -->
 
-    <div class="nav-content nav-content-sm">
-        <div class="nav-content-logo nav-content-logo-sm">
-            <a href="{{ url('/') }}">cafe de jnr</a>
-        </div>
-        <div class="nav-content-links nav-content-links-sm">
-        </div>
+    <div class="">
+        <a class="text-black font-bold text-2xl" href="{{ url('/') }}">cafe de jnr</a>
     </div>
 
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-lg overflow-hidden rounded-lg authentication-card">
+    <div class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-lg overflow-hidden rounded-lg">
         {{ $slot }}
     </div>
 </div>

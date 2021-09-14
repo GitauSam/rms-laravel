@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Buyer\Buyer;
 use App\Models\Vendor\Dish;
 use App\Models\Vendor\DishImage;
 use Illuminate\Http\Request;
@@ -207,5 +208,15 @@ class VendorController extends Controller
         $dish->save();
 
         return redirect()->route('vendor.index-dishes')->with('status', 'Dish deleted successfully');
+    }
+
+    public function getOrders() {
+        $orders = Buyer::where('purchased', '=', 0)->paginate(10);
+        return view('dashboard.vendor.index_unpurchased_orders', ['orders' => $orders]);
+    }
+
+    public function getSales() {
+        $orders = Buyer::where('purchased', '=', 1)->paginate(10);
+        return view('dashboard.vendor.index_purchased_orders', ['orders' => $orders]);
     }
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Buyer\Buyer;
 use App\Models\User;
 use App\Models\Vendor\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -18,7 +20,55 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $salesCount = 0;
+        $pendingOrders = 0;
+        $pendingOrdersData = [];
+        $totalUsers = 0;
+        $vendorCount = 0;
+        $userCount = 0;
+
+        if (auth()->user()->hasRole('user')) {
+            return redirect('dishes');
+        }
+
+        $unpurchasedOrders = Buyer::where('purchased', '=', '0')->get();
+        $purchasedOrders = Buyer::where('purchased', '=', '1')->get();
+
+        $totalUsers = User::all()->except(auth()->user()->id)->count();
+
+        foreach($unpurchasedOrders as $uo) {
+            if ($uo->dish->vendor->id == auth()->user()->id) {
+                $pendingOrders++;
+
+                array_push($pendingOrdersData, $uo->user->name . ': ' . $uo->dish->name);
+            }
+        }
+
+        foreach($purchasedOrders as $po) {
+            if ($po->dish->vendor->id == auth()->user()->id) {
+                $salesCount++;
+            }
+        }
+
+        foreach(User::all()->except(Auth::user()->id) as $u)  {
+            if ($u->hasRole('vendor')) {
+                $vendorCount++;
+            } else if ($u->hasRole('user')) {
+                $userCount++;
+            }
+        }
+
+        return view(
+            'dashboard', 
+            [
+                'vendorCount' => $vendorCount,
+                'userCount' => $userCount,
+                'totalUsers' => $totalUsers,
+                'pendingOrders' => $pendingOrders,
+                'salesCount' => $salesCount,
+                'pendingOrdersData' => $pendingOrdersData
+            ]
+        );
     }
 
     /**

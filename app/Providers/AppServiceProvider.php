@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Providers;
+namespace App\Providers; 
 
 use Illuminate\Support\ServiceProvider;
+use ConsoleTVs\Charts\Registrar as Charts;
+use Fidum\ChartTile\Charts\Chart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,10 +23,17 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
         if($this->app->environment() === 'production') {
             $this->app['request']->server->set('HTTPS', true);         
         }
+
+        $charts->register([
+            \App\Charts\DailyUsersChart::class,
+            \App\Charts\VendorOrdersChart::class,
+            \App\Charts\DishOrdersChart::class,
+        ]);
+        
     }
 }

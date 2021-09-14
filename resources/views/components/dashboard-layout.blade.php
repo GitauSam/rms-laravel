@@ -113,7 +113,7 @@
                                     id="tab4"
                                     @click="openTab = 4"
                                     class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
-                                    href="#"
+                                    href="{{ route('index-unpurchased-orders') }}"
                                 >
                                     <span class="text-left">
                                         <svg width="20" height="20" fill="currentColor" class="m-auto" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
@@ -126,10 +126,9 @@
                                     </span>
                                 </a>
                                 <a 
-                                    onclick="setActiveTab(5)"
                                     id= "tab5"
                                     class="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-black" 
-                                    href="#"
+                                    href="{{ route('index-purchased-orders') }}"
                                 >
                                     <span class="text-left">
                                         <svg width="20" height="20" fill="currentColor" class="m-auto" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
