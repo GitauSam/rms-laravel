@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Lipa Utilities') }}</title>
+        <title>{{ config('app.name', 'cafe de jnr') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -28,9 +28,11 @@
         <x-jet-banner />
 
         <div x-data="{ success_notif: true, failure_notif: true, open: false }" class="main-container">
-            <div class="container main-container-nav logo">
-                <a class="" href="{{ url('/') }}">lipa utilities</a>
-                <x-settings-link />
+            <div class="main-container-nav logo">
+                <div class="container main-container-nav">
+                    <a class="font-bold text-lg" href="{{ url('/') }}">cafe de jnr</a>
+                    <x-settings-link />
+                </div>
             </div>
             
             {{$slot}}
