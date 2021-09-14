@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         
         $user = User::create([
             'name' => 'John Doe',
+            'status' => 1,
             'email' => 'johndoe@gmail.com',
             'phone_number' => '254708059205',
             'id_number' => '123456',
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
 
         $vendor = User::create([
             'name' => 'Jane Doe',
+            'status' => 1,
             'email' => 'janedoe@fishnchips.com',
             'phone_number' => '254700000003',
             'id_number' => '121456',
@@ -47,6 +49,7 @@ class UserSeeder extends Seeder
 
         $superAdmin = User::create([
             'name' => 'Jack Doe',
+            'status' => 1,
             'email' => 'superadmin@cdj.com',
             'phone_number' => '254700000002',
             'id_number' => '113456',

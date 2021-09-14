@@ -147,6 +147,7 @@ class DashboardController extends Controller
 
         $user = User::create([
             'name' => $validated['customer_name'],
+            'status' => 1,
             'email' => $validated['customer_email'],
             'phone_number' => $validated['customer_phone_number'],
             'id_number' => $validated['customer_id_number'],
