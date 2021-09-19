@@ -144,13 +144,17 @@ class PaymentController extends Controller
         $payment->mpesa_callback_response = json_encode($validated);
         $payment->mpesa_callback_response_transaction_date = Carbon::now()->format('Y-m-d H:i:s');
 
+        if ($validated['Body']['stkCallback']['ResultCode'] == 0) {
+            $payment->status = 1;
+            $payment->buyer->purchased = 1;
+        }
+
         Log::debug('breakpoint 204');
 
         $payment->save();
 
         Log::debug('breakpoint 205');
 
-        $payment->buyer->purchased = 1;
         Log::debug('breakpoint 206');
         $payment->buyer->save();
 

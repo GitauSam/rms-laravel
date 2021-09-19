@@ -1,4 +1,4 @@
-{{-- dd($orders[0]->dish->vendor->vendor->vendor_name) --}}
+{{-- dd("here") --}}
 <x-dashboard-layout>
     <header class="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-2xl z-40">
         <div class="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
@@ -73,7 +73,11 @@
                             </div>
                         </form>
                     @else
-                        <div class="px-4 py-1 mt-4 text-white font-light tracking-wider bg-green-900 w-40 rounded text-center">Confirmed</div>
+                        <div class="w-full flex justify-center">
+                            <div class="px-4 py-1 mt-4 text-white font-light tracking-wider bg-green-900 w-40 rounded text-center">
+                                Confirmed
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>

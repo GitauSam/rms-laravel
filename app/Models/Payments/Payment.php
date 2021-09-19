@@ -43,7 +43,8 @@ class Payment extends Model
         'mpesa_callback_response_transaction_date',
         'mpesa_callback_response_phone_number',
         'buyer_id', // p
-        'vendor_id' // p
+        'vendor_id', // p
+        'paid'
     ];
 
     public function buyer() {
